@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>求职招聘 App · UI 设计稿展示</title>
+<style>
+  :root {
+    --blue:#2A6BF2; --blue-dark:#1E57D6; --blue-soft:#EBF1FF;
+    --orange:#FF7A3D; --green:#12B76A; --purple:#7C5CFF;
+    --text:#171A1F; --text-2:#6B7280; --text-3:#A3A9B3;
+    --bg:#F5F6F8; --card:#fff; --line:#EEF0F3; --danger:#F53F3F;
+    --radius:14px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+    background:#E9EBEE; color:var(--text); -webkit-font-smoothing:antialiased;
+  }
+  a { text-decoration:none; color:inherit; }
+  button { font-family:inherit; border:none; background:none; cursor:pointer; color:inherit; }
+  input { font-family:inherit; border:none; outline:none; background:transparent; }
+  ul { list-style:none; }
+
+  /* ===== 站点头部 ===== */
+  .topbar {
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding:14px 28px;
+    background:rgba(255,255,255,.86); backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,0,0,.06);
+  }
+  .brand { font-size:15px; font-weight:700; letter-spacing:.5px; }
+  .brand span { font-weight:400; color:var(--text-3); font-size:12px; margin-left:8px; }
+  .seg { display:flex; background:#F0F2F5; border-radius:999px; padding:3px; }
+  .seg button { padding:7px 18px; border-radius:999px; font-size:13px; color:var(--text-2); transition:all .2s; }
+  .seg button.on { background:var(--blue); color:#fff; font-weight:600; }
+
+  .wrap { padding:40px 24px 64px; }
+  .grid { display:flex; flex-wrap:wrap; justify-content:center; gap:44px; }
+  .frame { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .frame figcaption { font-size:12px; color:var(--text-2); }
+  .frame figcaption b { color:var(--text); font-weight:600; }
+
+  .single { display:flex; flex-direction:column; align-items:center; gap:20px; }
+  .single.hidden, .grid.hidden { display:none; }
+  .tabs { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .tab-btn { padding:8px 22px; border-radius:999px; font-size:13px; color:var(--text-2); background:#fff; box-shadow:0 2px 8px rgba(20,40,90,.06); transition:all .2s; }
+  .tab-btn.on { background:var(--blue); color:#fff; font-weight:600; }
+
+  /* ===== 手机外壳 ===== */
+  .phone {
+    width:340px; max-width:100%; background:#101215;
+    border-radius:46px; padding:9px;
+    box-shadow:0 26px 50px -18px rgba(15,25,50,.38), 0 4px 14px rgba(15,25,50,.16);
+  }
+  .screen {
+    height:720px; background:var(--bg); border-radius:38px; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .statusbar {
+    flex:none; display:flex; align-items:center; justify-content:space-between;
+    padding:14px 22px 4px; font-size:13px; font-weight:600;
+  }
+  .page { flex:1; overflow-y:auto; padding:8px 16px 20px; scrollbar-width:none; }
+  .page::-webkit-scrollbar { display:none; }
+
+  /* ===== 首页 ===== */
+  .loc-row { display:flex; align-items:center; justify-content:space-between; margin:6px 0 14px; }
+  .loc { display:inline-flex; align-items:center; gap:4px; font-size:12px; color:var(--text-2); }
+  .icon-btn { position:relative; width:32px; height:32px; display:grid; place-items:center; border-radius:50%; transition:background .2s; }
+  .icon-btn:active { background:rgba(0,0,0,.06); }
+  .icon-btn .dot { position:absolute; top:6px; right:6px; width:7px; height:7px; border-radius:50%; background:var(--danger); border:1.5px solid var(--bg); }
+  .home-hero h1 { font-size:23px; font-weight:700; letter-spacing:.5px; }
+  .home-hero .sub { margin-top:6px; font-size:12px; color:var(--text-3); }
+  .home-hero .sub b { color:var(--blue); }
+  .search {
+    display:flex; align-items:center; gap:8px; margin-top:14px; padding:5px 5px 5px 14px;
+    background:var(--card); border-radius:999px; box-shadow:0 2px 10px rgba(20,40,90,.05);
+  }
+  .search svg { flex:none; color:var(--text-3); }
+  .search input { flex:1; font-size:13px; color:var(--text); }
+  .search input::placeholder { color:var(--text-3); }
+  .search-go { flex:none; width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:var(--blue); color:#fff; }
+  .quick-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px; }
+  .quick { display:flex; flex-direction:column; align-items:center; gap:7px; padding:12px 0 10px; background:var(--card); border-radius:var(--radius); font-size:12px; color:var(--text-2); transition:transform .15s; }
+  .quick:active { transform:scale(.95); }
+  .q-ico { width:32px; height:32px; border-radius:10px; display:grid; place-items:center; color:var(--blue); background:var(--blue-soft); }
+  .q-ico.g { color:var(--green); background:#E8F8F0; }
+  .q-ico.p { color:var(--purple); background:#F0EBFF; }
+  .q-ico.o { color:var(--orange); background:#FFF1E8; }
+  .section-head { display:flex; align-items:baseline; justify-content:space-between; margin:22px 2px 12px; }
+  .section-head h2 { font-size:16px; font-weight:700; }
+  .section-head a { font-size:12px; color:var(--text-3); }
+  .job-card { display:block; background:var(--card); border-radius:var(--radius); padding:14px; margin-bottom:12px; box-shadow:0 2px 10px rgba(20,40,90,.04); transition:transform .15s; }
+  .job-card:active { transform:scale(.98); }
+  .job-top { display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+  .job-top h3 { font-size:15px; font-weight:700; }
+  .salary { font-size:13px; font-weight:700; color:var(--blue); white-space:nowrap; }
+  .job-meta { margin-top:7px; font-size:12px; color:var(--text-3); }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .tags span { font-size:11px; color:var(--blue); background:var(--blue-soft); padding:4px 8px; border-radius:6px; }
+  .job-foot { display:flex; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px solid var(--line); font-size:11px; color:var(--text-3); }
+
+  /* ===== TabBar ===== */
+  .tabbar { flex:none; display:flex; align-items:center; justify-content:space-around; padding:8px 10px 16px; background:var(--card); border-top:1px solid var(--line); }
+  .tab { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; color:var(--text-3); }
+  .tab .tab-ico { width:42px; height:27px; border-radius:999px; display:grid; place-items:center; transition:background .2s; }
+  .tab.on { color:var(--blue); font-weight:600; }
+  .tab.on .tab-ico { background:var(--blue); color:#fff; }
+
+  /* ===== 详情页 ===== */
+  .navbar { flex:none; display:flex; align-items:center; justify-content:space-between; padding:6px 10px; }
+  .navbar .navbar-title { font-size:15px; font-weight:600; }
+  .navbar .nav-group { display:flex; gap:2px; }
+  .detail-card { background:var(--card); border-radius:var(--radius); padding:16px; margin-top:6px; box-shadow:0 2px 10px rgba(20,40,90,.04); }
+  .detail-card h1 { font-size:19px; font-weight:700; }
+  .salary-row { display:flex; align-items:center; gap:8px; margin-top:8px; }
+  .salary-lg { font-size:19px; font-weight:800; color:var(--blue); }
+  .badge-hot { font-size:11px; color:var(--orange); background:#FFF1E8; padding:3px 8px; border-radius:6px; font-weight:600; }
+  .detail-meta { margin-top:10px; font-size:12px; color:var(--text-3); }
+  .company-row { display:flex; align-items:center; gap:12px; background:var(--card); border-radius:var(--radius); padding:14px 16px; margin-top:12px; box-shadow:0 2px 10px rgba(20,40,90,.04); }
+  .company-logo { flex:none; width:42px; height:42px; border-radius:12px; display:grid; place-items:center; background:var(--blue); color:#fff; font-size:16px; font-weight:700; }
+  .company-info { flex:1; min-width:0; }
+  .company-info h3 { font-size:14px; font-weight:700; }
+  .company-info p { margin-top:3px; font-size:11px; color:var(--text-3); }
+  .cert { display:inline-flex; align-items:center; gap:3px; margin-top:5px; font-size:10px; color:var(--blue); background:var(--blue-soft); padding:2px 7px; border-radius:5px; }
+  .block { background:var(--card); border-radius:var(--radius); padding:16px; margin-top:12px; box-shadow:0 2px 10px rgba(20,40,90,.04); }
+  .block h2 { font-size:14px; font-weight:700; margin-bottom:10px; }
+  .block p { font-size:13px; line-height:1.8; color:var(--text-2); }
+  .block ol { padding-left:18px; }
+  .block ol li { font-size:13px; line-height:1.9; color:var(--text-2); }
+  .actionbar { flex:none; display:flex; align-items:center; gap:10px; padding:10px 16px 16px; background:var(--card); border-top:1px solid var(--line); }
+  .chat-fab { flex:none; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--blue-soft); color:var(--blue); transition:transform .15s; }
+  .chat-fab:active { transform:scale(.92); }
+  .btn-primary { flex:1; height:44px; border-radius:999px; background:var(--blue); color:#fff; font-size:14px; font-weight:600; letter-spacing:2px; transition:background .2s; }
+  .btn-primary:active { background:var(--blue-dark); }
+  .btn-primary.done { background:#9DB9F5; }
+
+  /* ===== 消息页 ===== */
+  .msg-header { display:flex; align-items:center; justify-content:space-between; padding:6px 2px 12px; }
+  .msg-header h1 { font-size:21px; font-weight:700; }
+  .msg-header .nav-group { display:flex; gap:4px; }
+  .chips { display:flex; gap:8px; margin-bottom:6px; }
+  .chip { padding:6px 16px; border-radius:999px; font-size:12px; color:var(--text-2); background:#EBEDF1; transition:all .2s; }
+  .chip.on { background:var(--card); color:var(--blue); font-weight:600; box-shadow:0 2px 8px rgba(20,40,90,.08); }
+  .msg-item { display:flex; align-items:center; gap:12px; padding:11px 4px; border-radius:12px; transition:background .15s; cursor:pointer; }
+  .msg-item:active { background:rgba(0,0,0,.03); }
+  .avatar { flex:none; width:42px; height:42px; border-radius:50%; display:grid; place-items:center; color:#fff; font-size:14px; font-weight:600; }
+  .avatar.sys { background:var(--blue-soft); color:var(--blue); }
+  .msg-body { flex:1; min-width:0; }
+  .msg-name { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; }
+  .msg-name .role { font-size:10px; font-weight:500; color:var(--text-3); background:#F0F2F5; padding:2px 6px; border-radius:4px; }
+  .msg-name .role.b { color:var(--blue); background:var(--blue-soft); }
+  .msg-preview { margin-top:4px; font-size:12px; color:var(--text-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .msg-side { flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+  .msg-time { font-size:11px; color:var(--text-3); }
+  .msg-badge { min-width:16px; height:16px; padding:0 4px; border-radius:999px; background:var(--danger); color:#fff; font-size:10px; font-weight:600; display:grid; place-items:center; }
+  .msg-item.hide { display:none; }
+
+  footer { text-align:center; padding:0 24px 48px; font-size:12px; color:var(--text-3); }
+
+  @media (max-width:1180px) { .grid { gap:36px; } .phone { width:300px; } }
+  @media (max-width:900px) { .grid { flex-direction:column; align-items:center; } .phone { width:340px; } }
+  @media (max-width:480px) { .topbar { padding:12px 16px; } .wrap { padding:24px 12px 40px; } .phone { width:100%; padding:6px; } }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">求职招聘 App · UI 设计稿展示<span>3 个核心界面 · 高保真还原</span></div>
+  <div class="seg">
+    <button data-view="grid" class="on">并排总览</button>
+    <button data-view="single">单屏浏览</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="gridView" class="grid">
+    <figure class="frame"><div class="phone" data-screen="home"></div><figcaption><b>01 首页</b> · 职位推荐</figcaption></figure>
+    <figure class="frame"><div class="phone" data-screen="job"></div><figcaption><b>02 职位详情</b> · 立即沟通</figcaption></figure>
+    <figure class="frame"><div class="phone" data-screen="messages"></div><figcaption><b>03 消息</b> · 沟通列表</figcaption></figure>
+  </section>
+
+  <section id="singleView" class="single hidden">
+    <div class="tabs">
+      <button class="tab-btn on" data-go="home">首页</button>
+      <button class="tab-btn" data-go="job">职位详情</button>
+      <button class="tab-btn" data-go="messages">消息</button>
+    </div>
+    <div class="phone" id="singlePhone"></div>
+  </section>
+</main>
+
+<footer>纯静态单文件 · 无外部依赖 · 可直接部署到 GitHub Pages</footer>
+
+<script>
+(function () {
+  var STATUS = '<div class="statusbar"><span>9:41</span>' +
+    '<svg width="46" height="12" viewBox="0 0 46 12" fill="currentColor">' +
+    '<rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/>' +
+    '<rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="1" width="3" height="11" rx="1"/>' +
+    '<path d="M25 4c2.6-2.3 6.4-2.3 9 0l-1.5 1.7a4.6 4.6 0 0 0-6 0L25 4zm2.4 2.7a3 3 0 0 1 4.2 0L29.5 9l-2.1-2.3z"/>' +
+    '<rect x="38" y="2" width="7" height="10" rx="2" fill="none" stroke="currentColor"/>' +
+    '<rect x="39.5" y="3.5" width="4" height="7" rx="1"/></svg></div>';
+
+  var TABS = {
+    home: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21v-7h6v7"/></svg>',
+    job: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+    messages: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2.5-2.5A8 8 0 1 1 21 12z"/></svg>',
+    me: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>'
+  };
+
+  function tabbar(active) {
+    var items = [['home', '首页'], ['job', '职位'], ['messages', '消息'], ['me', '我的']];
+    var html = '<nav class="tabbar">';
+    items.forEach(function (it) {
+      var key = it[0] === 'me' ? 'me' : it[0];
+      var on = it[0] === active ? ' on' : '';
+      var go = ' data-go="' + (it[0] === 'me' ? 'home' : it[0]) + '"';
+      html += '<a class="tab' + on + '"' + go + '><span class="tab-ico">' + TABS[key] + '</span>' + it[1] + '</a>';
+    });
+    return html + '</nav>';
+  }
+
+  var HOME =
+    '<div class="loc-row"><span class="loc">' +
+    '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>' +
+    '北京 · 朝阳区</span>' +
+    '<button class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><i class="dot"></i></button></div>' +
+    '<div class="home-hero"><h1>找到心仪的工作</h1><p class="sub">已有 <b>9781</b> 家企业上架最新职位</p></div>' +
+    '<div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
+    '<input type="text" placeholder="搜索职位、公司或技能" data-role="search" />' +
+    '<button class="search-go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h10M18 18h2"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="18" r="2"/></svg></button></div>' +
+    '<div class="quick-grid">' +
+    '<a class="quick" data-go="job"><span class="q-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M15 9h4a2 2 0 0 1 2 2v10"/><path d="M8 7h3M8 11h3M8 15h3"/></svg></span>国企</a>' +
+    '<a class="quick" data-go="job"><span class="q-ico g"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></span>编制</a>' +
+    '<a class="quick" data-go="job"><span class="q-ico p"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v5"/></svg></span>实习</a>' +
+    '<a class="quick" data-go="job"><span class="q-ico o"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 4.5-2.5 6C8 9.5 7 11 7 13a5 5 0 0 0 10 0c0-1.5-.5-2.7-1.5-4-.3 1-.8 1.7-1.5 2 .3-2.5-.5-6-2-9z"/></svg></span>高薪直招</a>' +
+    '</div>' +
+    '<div class="section-head"><h2>推荐职位</h2><a data-go="job">查看全部 ›</a></div>' +
+    '<a class="job-card" data-go="job"><div class="job-top"><h3>高级前端工程师</h3><span class="salary">25-40K·14薪</span></div>' +
+    '<p class="job-meta">星野科技 · 互联网 · 500-999人</p>' +
+    '<div class="tags"><span>五险一金</span><span>双休</span><span>朝九晚五</span></div>' +
+    '<div class="job-foot"><span>发布于 · 北京</span><span>10分钟前</span></div></a>' +
+    '<a class="job-card" data-go="job"><div class="job-top"><h3>产品运营实习生</h3><span class="salary">160-220/天</span></div>' +
+    '<p class="job-meta">快充文化 · 传媒 · 50-99人</p>' +
+    '<div class="tags"><span>转正机会</span><span>可实习</span><span>弹性工作</span></div>' +
+    '<div class="job-foot"><span>发布于 · 成都</span><span>15分钟前</span></div></a>';
+
+  var JOB =
+    '<div class="navbar">' +
+    '<a class="icon-btn" data-go="home"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>' +
+    '<span class="navbar-title">职位详情</span><div class="nav-group">' +
+    '<button class="icon-btn" data-role="fav"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.3.9-4.5 4.3 1 6.2-5.5-3-5.5 3 1-6.2L3 9.5l6.3-.9z"/></svg></button>' +
+    '<button class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>' +
+    '</div></div>' +
+    '<div class="detail-card"><h1>高级前端工程师</h1>' +
+    '<div class="salary-row"><span class="salary-lg">25-40K·14薪</span><span class="badge-hot">急聘</span></div>' +
+    '<p class="detail-meta">北京 · 朝阳区 · 3-5年 · 本科</p></div>' +
+    '<div class="company-row"><span class="company-logo">星</span><div class="company-info">' +
+    '<h3>星野科技</h3><p>互联网 · 500-999人 · 上市</p>' +
+    '<span class="cert"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>已认证</span></div>' +
+    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A3A9B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>' +
+    '<div class="block"><h2>职位描述</h2><p>负责公司核心产品的创意和设计开发，主要 Web 端和移动端产品的整体视觉设计。</p>' +
+    '<ol><li>与产品、设计师紧密协作，高质量完成业务需求的视觉实现；</li>' +
+    '<li>负责优化交互体验，持续提升页面的易用性与性能；</li>' +
+    '<li>参与技术方案评审，推动团队工程化与组件化建设。</li></ol></div>' +
+    '<div class="block"><h2>任职要求</h2>' +
+    '<ol><li>本科及以上学历，计算机相关专业，3 年以上前端开发经验；</li>' +
+    '<li>精通 React / TypeScript，具备组件化开发和性能优化经验；</li>' +
+    '<li>有大厂工作经验优先，具备良好的审美与团队协作能力。</li></ol></div>';
+
+  var MESSAGES =
+    '<div class="msg-header"><h1>消息</h1><div class="nav-group">' +
+    '<button class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' +
+    '<button class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>' +
+    '</div></div>' +
+    '<div class="chips"><button class="chip on" data-filter="all">全部</button>' +
+    '<button class="chip" data-filter="unread">未读</button>' +
+    '<button class="chip" data-filter="interview">面试约</button></div>' +
+    '<ul>' +
+    '<li class="msg-item" data-type="chat" data-unread="1"><span class="avatar" style="background:#2A6BF2">星</span>' +
+    '<div class="msg-body"><div class="msg-name">星野科技<span class="role b">王女士</span></div>' +
+    '<p class="msg-preview">方便沟通一下高级前端工程师岗位吗？</p></div>' +
+    '<div class="msg-side"><span class="msg-time">10:12</span><span class="msg-badge">1</span></div></li>' +
+    '<li class="msg-item" data-type="chat" data-unread="1"><span class="avatar" style="background:#FF7A3D">拾</span>' +
+    '<div class="msg-body"><div class="msg-name">拾光文化<span class="role b">李女士</span></div>' +
+    '<p class="msg-preview">前端大牛，在考虑新的工作机会吗？</p></div>' +
+    '<div class="msg-side"><span class="msg-time">昨天</span><span class="msg-badge">2</span></div></li>' +
+    '<li class="msg-item" data-type="interview"><span class="avatar" style="background:#12B76A">好</span>' +
+    '<div class="msg-body"><div class="msg-name">好家便利店<span class="role">张先生</span></div>' +
+    '<p class="msg-preview">临时工岗位有合适的人选吗？</p></div>' +
+    '<div class="msg-side"><span class="msg-time">周二</span></div></li>' +
+    '<li class="msg-item" data-type="system"><span class="avatar sys">' +
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>' +
+    '<div class="msg-body"><div class="msg-name">面试邀约助手<span class="role">系统</span></div>' +
+    '<p class="msg-preview">你投递的岗位已通过初筛，注意查收邀约！</p></div>' +
+    '<div class="msg-side"><span class="msg-time">周二</span></div></li>' +
+    '<li class="msg-item" data-type="chat"><span class="avatar" style="background:#7C5CFF">蓝</span>' +
+    '<div class="msg-body"><div class="msg-name">蓝湾教育<span class="role">陈老师</span></div>' +
+    '<p class="msg-preview">请问平时有带过新人吗？</p></div>' +
+    '<div class="msg-side"><span class="msg-time">昨天</span></div></li>' +
+    '<li class="msg-item" data-type="system"><span class="avatar sys">' +
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>' +
+    '<div class="msg-body"><div class="msg-name">快捷小助手<span class="role">系统</span></div>' +
+    '<p class="msg-preview">本周为你新增匹配了 36 个职位</p></div>' +
+    '<div class="msg-side"><span class="msg-time">周一</span></div></li>' +
+    '</ul>';
+
+  function screenHTML(key) {
+    if (key === 'home') return STATUS + '<div class="page">' + HOME + '</div>' + tabbar('home');
+    if (key === 'job') return STATUS + '<div class="page">' + JOB + '</div>' +
+      '<div class="actionbar"><button class="chat-fab"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2.5-2.5A8 8 0 1 1 21 12z"/></svg></button>' +
+      '<button class="btn-primary" data-role="chat">立即沟通</button></div>';
+    return STATUS + '<div class="page">' + MESSAGES + '</div>' + tabbar('messages');
+  }
+
+  var gridView = document.getElementById('gridView');
+  var singleView = document.getElementById('singleView');
+  var singlePhone = document.getElementById('singlePhone');
+  var current = 'home';
+
+  // 并排总览：三台手机
+  Array.prototype.forEach.call(document.querySelectorAll('[data-screen]'), function (el) {
+    el.innerHTML = '<div class="screen">' + screenHTML(el.dataset.screen) + '</div>';
+  });
+
+  function show(key) {
+    if (['home', 'job', 'messages'].indexOf(key) === -1) key = 'home';
+    current = key;
+    singlePhone.innerHTML = '<div class="screen">' + screenHTML(key) + '</div>';
+    Array.prototype.forEach.call(document.querySelectorAll('.tab-btn'), function (b) {
+      b.classList.toggle('on', b.dataset.go === key);
+    });
+    if (location.hash.slice(1) !== key) history.replaceState(null, '', '#' + key);
+  }
+
+  function setView(v) {
+    var single = v === 'single';
+    gridView.classList.toggle('hidden', single);
+    singleView.classList.toggle('hidden', !single);
+    Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (b) {
+      b.classList.toggle('on', b.dataset.view === v);
+    });
+    if (single) show(current);
+  }
+
+  // 事件委托：页面内导航
+  document.addEventListener('click', function (e) {
+    var nav = e.target.closest('[data-go]');
+    if (nav) {
+      e.preventDefault();
+      setView('single');
+      show(nav.dataset.go);
+      return;
+    }
+    var chip = e.target.closest('.chip');
+    if (chip) {
+      Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (c) { c.classList.remove('on'); });
+      chip.classList.add('on');
+      var f = chip.dataset.filter;
+      Array.prototype.forEach.call(document.querySelectorAll('.msg-item'), function (it) {
+        var t = it.dataset.type;
+        var ok = f === 'all' || (f === 'unread' && it.dataset.unread === '1') ||
+          (f === 'interview' && (t === 'interview' || t === 'system'));
+        it.classList.toggle('hide', !ok);
+      });
+      return;
+    }
+    var fav = e.target.closest('[data-role="fav"]');
+    if (fav) {
+      var on = fav.style.color !== 'rgb(255, 122, 61)';
+      fav.style.color = on ? '#FF7A3D' : '';
+      return;
+    }
+    var chat = e.target.closest('[data-role="chat"]');
+    if (chat) {
+      chat.classList.add('done');
+      chat.textContent = '已发送沟通请求';
+      setTimeout(function () { chat.classList.remove('done'); chat.textContent = '立即沟通'; }, 1800);
+    }
+  });
+
+  document.querySelector('.seg').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) setView(b.dataset.view);
+  });
+
+  var start = (location.hash.slice(1) || 'home');
+  if (start === 'home' && !location.hash) { show('home'); } else { current = start; show(start); }
+})();
+</script>
+</body>
+</html>
