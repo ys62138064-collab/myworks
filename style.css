@@ -1,0 +1,455 @@
+/* ===== 招聘 App UI 高保真展示 ===== */
+:root {
+  --blue: #2A6BF2;
+  --blue-dark: #1E57D6;
+  --blue-soft: #EBF1FF;
+  --orange: #FF7A3D;
+  --text: #171A1F;
+  --text-2: #6B7280;
+  --text-3: #A3A9B3;
+  --bg: #F5F6F8;
+  --card: #FFFFFF;
+  --line: #EEF0F3;
+  --danger: #F53F3F;
+  --radius: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+  background: #E9EBEE;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; border: none; background: none; cursor: pointer; }
+input { font-family: inherit; border: none; outline: none; background: transparent; }
+ul { list-style: none; }
+
+/* ===== 展示舞台（浏览器外壳） ===== */
+.stage-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, .85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+.stage-title { font-size: 14px; font-weight: 600; color: var(--text-2); letter-spacing: .5px; }
+.stage-nav { display: flex; gap: 6px; }
+.stage-nav a {
+  font-size: 13px;
+  color: var(--text-2);
+  padding: 7px 16px;
+  border-radius: 999px;
+  transition: all .2s;
+}
+.stage-nav a:hover { background: #F0F2F5; }
+.stage-nav a.active { background: var(--blue); color: #fff; font-weight: 600; }
+
+.stage-body {
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 64px;
+}
+
+/* ===== 手机外壳 ===== */
+.phone {
+  width: 390px;
+  max-width: 100%;
+  background: #101215;
+  border-radius: 48px;
+  padding: 10px;
+  box-shadow: 0 30px 60px -18px rgba(15, 25, 50, .35), 0 4px 14px rgba(15, 25, 50, .18);
+}
+.screen {
+  position: relative;
+  height: 780px;
+  background: var(--bg);
+  border-radius: 38px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 状态栏 ===== */
+.statusbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.statusbar svg { display: block; }
+
+/* ===== 页面滚动区 ===== */
+.page {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 16px 20px;
+  scrollbar-width: none;
+}
+.page::-webkit-scrollbar { display: none; }
+
+/* ===== 首页 ===== */
+.loc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 6px 0 14px;
+}
+.loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.icon-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--text);
+  transition: background .2s;
+}
+.icon-btn:active { background: rgba(0, 0, 0, .06); }
+.icon-btn .dot {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--danger);
+  border: 1.5px solid var(--bg);
+}
+
+.home-hero h1 { font-size: 24px; font-weight: 700; letter-spacing: .5px; }
+.home-hero .sub { margin-top: 6px; font-size: 12px; color: var(--text-3); }
+.home-hero .sub b { color: var(--blue); font-weight: 600; }
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 5px 5px 5px 14px;
+  background: var(--card);
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(20, 40, 90, .05);
+}
+.search svg { flex: none; color: var(--text-3); }
+.search input { flex: 1; font-size: 13px; color: var(--text); }
+.search input::placeholder { color: var(--text-3); }
+.search-go {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  transition: background .2s;
+}
+.search-go:active { background: var(--blue-dark); }
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+.quick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 0 10px;
+  background: var(--card);
+  border-radius: var(--radius);
+  font-size: 12px;
+  color: var(--text-2);
+  transition: transform .15s;
+}
+.quick:active { transform: scale(.95); }
+.q-ico {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: var(--blue);
+  background: var(--blue-soft);
+}
+.q-ico.orange { color: var(--orange); background: #FFF1E8; }
+.q-ico.green { color: #12B76A; background: #E8F8F0; }
+.q-ico.purple { color: #7C5CFF; background: #F0EBFF; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 22px 2px 12px;
+}
+.section-head h2 { font-size: 17px; font-weight: 700; }
+.section-head a { font-size: 12px; color: var(--text-3); }
+
+.job-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(20, 40, 90, .04);
+  transition: transform .15s;
+}
+.job-card:active { transform: scale(.98); }
+.job-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.job-top h3 { font-size: 16px; font-weight: 700; }
+.salary { font-size: 14px; font-weight: 700; color: var(--blue); white-space: nowrap; }
+.job-meta { margin-top: 7px; font-size: 12px; color: var(--text-3); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tags span {
+  font-size: 11px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.job-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ===== 底部 TabBar ===== */
+.tabbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px 10px calc(10px + 6px);
+  background: var(--card);
+  border-top: 1px solid var(--line);
+}
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-3);
+}
+.tab .tab-ico {
+  width: 44px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  transition: background .2s;
+}
+.tab.active { color: var(--blue); font-weight: 600; }
+.tab.active .tab-ico { background: var(--blue); color: #fff; }
+
+/* ===== 顶部导航栏（详情页） ===== */
+.navbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+}
+.navbar .navbar-title { font-size: 16px; font-weight: 600; }
+.navbar .nav-group { display: flex; gap: 2px; }
+
+/* ===== 职位详情页 ===== */
+.detail-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 6px;
+  box-shadow: 0 2px 10px rgba(20, 40, 90, .04);
+}
+.detail-card h1 { font-size: 20px; font-weight: 700; }
+.salary-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.salary-lg { font-size: 20px; font-weight: 800; color: var(--blue); }
+.badge-hot {
+  font-size: 11px;
+  color: var(--orange);
+  background: #FFF1E8;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.detail-meta { margin-top: 10px; font-size: 12px; color: var(--text-3); }
+
+.company-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 12px;
+  box-shadow: 0 2px 10px rgba(20, 40, 90, .04);
+}
+.company-logo {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+}
+.company-info { flex: 1; min-width: 0; }
+.company-info h3 { font-size: 15px; font-weight: 700; }
+.company-info p { margin-top: 3px; font-size: 11px; color: var(--text-3); }
+.cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 5px;
+  font-size: 10px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+.block {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 12px;
+  box-shadow: 0 2px 10px rgba(20, 40, 90, .04);
+}
+.block h2 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.block p { font-size: 13px; line-height: 1.8; color: var(--text-2); }
+.block ol { padding-left: 18px; }
+.block ol li { font-size: 13px; line-height: 1.9; color: var(--text-2); }
+
+/* 详情页底部操作栏 */
+.actionbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px calc(10px + 6px);
+  background: var(--card);
+  border-top: 1px solid var(--line);
+}
+.chat-fab {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--blue-soft);
+  color: var(--blue);
+  transition: transform .15s;
+}
+.chat-fab:active { transform: scale(.92); }
+.btn-primary {
+  flex: 1;
+  height: 46px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: background .2s;
+}
+.btn-primary:active { background: var(--blue-dark); }
+.btn-primary.done { background: #9DB9F5; }
+
+/* ===== 消息页 ===== */
+.msg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 2px 12px;
+}
+.msg-header h1 { font-size: 22px; font-weight: 700; }
+.msg-header .nav-group { display: flex; gap: 4px; }
+
+.chips { display: flex; gap: 8px; margin-bottom: 6px; }
+.chip {
+  padding: 7px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-2);
+  background: #EBEDF1;
+  transition: all .2s;
+}
+.chip.active { background: var(--card); color: var(--blue); font-weight: 600; box-shadow: 0 2px 8px rgba(20, 40, 90, .08); }
+
+.msg-list { margin-top: 6px; }
+.msg-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  border-radius: 12px;
+  transition: background .15s;
+}
+.msg-item:active { background: rgba(0, 0, 0, .03); }
+.avatar {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+}
+.avatar.sys { background: var(--blue-soft); color: var(--blue); }
+.msg-body { flex: 1; min-width: 0; }
+.msg-name { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+.msg-name .role { font-size: 10px; font-weight: 500; color: var(--text-3); background: #F0F2F5; padding: 2px 6px; border-radius: 4px; }
+.msg-name .role.blue { color: var(--blue); background: var(--blue-soft); }
+.msg-preview { margin-top: 4px; font-size: 12px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-side { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.msg-time { font-size: 11px; color: var(--text-3); }
+.msg-badge {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+}
+.msg-item.hidden { display: none; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 480px) {
+  .stage-body { padding: 20px 10px 40px; }
+  .phone { padding: 6px; border-radius: 40px; }
+  .screen { height: calc(100vh - 140px); min-height: 620px; }
+}

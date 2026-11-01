@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>职位详情 · 求职招聘 App UI 展示</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="stage-bar">
+    <span class="stage-title">求职招聘 App · UI 高保真展示</span>
+    <nav class="stage-nav">
+      <a href="index.html">首页</a>
+      <a href="job-detail.html" class="active">职位详情</a>
+      <a href="messages.html">消息</a>
+    </nav>
+  </header>
+
+  <main class="stage-body">
+    <section class="phone">
+      <div class="screen">
+
+        <!-- 状态栏 -->
+        <div class="statusbar">
+          <span>9:41</span>
+          <svg width="46" height="12" viewBox="0 0 46 12" fill="currentColor">
+            <rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/>
+            <rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="1" width="3" height="11" rx="1"/>
+            <path d="M25 4c2.6-2.3 6.4-2.3 9 0l-1.5 1.7a4.6 4.6 0 0 0-6 0L25 4zm2.4 2.7a3 3 0 0 1 4.2 0L29.5 9l-2.1-2.3z"/>
+            <rect x="38" y="2" width="7" height="10" rx="2" fill="none" stroke="currentColor"/>
+            <rect x="39.5" y="3.5" width="4" height="7" rx="1"/>
+          </svg>
+        </div>
+
+        <!-- 顶部导航 -->
+        <div class="navbar">
+          <a class="icon-btn" href="index.html" title="返回">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+          </a>
+          <span class="navbar-title">职位详情</span>
+          <div class="nav-group">
+            <button class="icon-btn fav-btn" title="收藏">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3 2.7 5.6 6.3.9-4.5 4.3 1 6.2-5.5-3-5.5 3 1-6.2L3 9.5l6.3-.9z"/>
+              </svg>
+            </button>
+            <button class="icon-btn" title="更多">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 页面内容 -->
+        <div class="page">
+          <div class="detail-card">
+            <h1>高级前端工程师</h1>
+            <div class="salary-row">
+              <span class="salary-lg">25-40K·14薪</span>
+              <span class="badge-hot">急聘</span>
+            </div>
+            <p class="detail-meta">北京 · 朝阳区 · 3-5年 · 本科</p>
+          </div>
+
+          <div class="company-row">
+            <span class="company-logo">星</span>
+            <div class="company-info">
+              <h3>星野科技</h3>
+              <p>互联网 · 500-999人 · 上市</p>
+              <span class="cert">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 13 4 4L19 7"/>
+                </svg>
+                已认证
+              </span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A3A9B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </div>
+
+          <div class="block">
+            <h2>职位描述</h2>
+            <p>负责公司核心产品的创意和设计开发，主要 Web 端和移动端产品的整体视觉设计。</p>
+            <ol>
+              <li>与产品、设计师紧密协作，高质量完成业务需求的视觉实现；</li>
+              <li>负责优化交互体验，持续提升页面的易用性与性能；</li>
+              <li>参与技术方案评审，推动团队工程化与组件化建设。</li>
+            </ol>
+          </div>
+
+          <div class="block">
+            <h2>任职要求</h2>
+            <ol>
+              <li>本科及以上学历，计算机相关专业，3 年以上前端开发经验；</li>
+              <li>精通 React / TypeScript，具备组件化开发和性能优化经验；</li>
+              <li>有大厂工作经验优先，具备良好的审美与团队协作能力。</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 底部操作栏 -->
+        <div class="actionbar">
+          <button class="chat-fab" title="快捷沟通">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a8 8 0 0 1-8 8H4l2.5-2.5A8 8 0 1 1 21 12z"/>
+            </svg>
+          </button>
+          <button class="btn-primary">立即沟通</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
