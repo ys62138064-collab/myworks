@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deepjob · 界面设计总览</title>
+  <meta name="description" content="Deepjob APP 32 张界面设计总览：找到适合你的第一份工作，让能力被看见，让选择有方向。" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="hero wrap">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19V5l9 8 7-6v12" />
+        </svg>
+      </span>
+      <div>
+        <h1>Deepjob</h1>
+        <p class="tagline">找到適合你的第一份工作 · 讓能力被看見 · 讓選擇有方向</p>
+      </div>
+    </div>
+
+    <p class="lede">
+      面向應屆生與轉職者的智能求職助手：AI 配對、職涯對話、就業課堂與情緒支援，
+      把求職的每一個環節收進一個 App。以下是全部 32 張界面，按主流程與模組排列。
+    </p>
+
+    <div class="stats">
+      <div class="stat"><b id="statScreens">32</b><span>界面</span></div>
+      <div class="stat"><b>5</b><span>模組</span></div>
+      <div class="stat"><b>390×870</b><span>設計稿尺寸</span></div>
+      <div class="stat"><b>v1.0</b><span>設計規範</span></div>
+    </div>
+  </header>
+
+  <nav class="bar" id="nav" aria-label="模組篩選"></nav>
+
+  <main id="app" class="wrap"></main>
+
+  <footer class="wrap foot">
+    <p>Deepjob UI Showcase · 設計稿版權歸 Deepjob 團隊所有，僅用於設計評審與展示。</p>
+    <p class="hint">點擊卡片可放大檢視，鍵盤 ← / → 切換，Esc 關閉。</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="界面放大檢視">
+    <button class="lb-btn lb-close" type="button" aria-label="關閉">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="lb-btn lb-prev" type="button" aria-label="上一張">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <figure class="lb-stage">
+      <img id="lbImg" alt="" />
+      <figcaption>
+        <span class="lb-no" id="lbNo"></span>
+        <span class="lb-title" id="lbTitle"></span>
+        <span class="lb-count" id="lbCount"></span>
+      </figcaption>
+    </figure>
+    <button class="lb-btn lb-next" type="button" aria-label="下一張">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
