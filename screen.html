@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>查看界面 · Deepjob 界面集</title>
+<meta name="description" content="Deepjob 单个界面大图查看，支持键盘与滑动切换。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-root="./" data-page="screen">
+
+<header class="site-header" data-header></header>
+
+<main class="wrap viewer">
+  <div class="viewer-top">
+    <a class="back-link" href="index.html" data-back>← 返回首页</a>
+    <div class="left">
+      <span data-position>01 / 29</span>
+      <span>·</span>
+      <span>点击画面可放大，键盘 ← → 切换</span>
+    </div>
+  </div>
+
+  <div data-viewer></div>
+</main>
+
+<footer class="site-footer" data-footer></footer>
+
+<div class="lightbox" data-lightbox aria-hidden="true">
+  <button class="close" type="button" aria-label="关闭">×</button>
+  <img alt="">
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

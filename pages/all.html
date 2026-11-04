@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全部界面 · Deepjob 界面集</title>
+<meta name="description" content="Deepjob 求职 App 全部 29 个界面，支持关键词搜索与大图查看。">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-root="../" data-page="all">
+
+<header class="site-header" data-header></header>
+
+<main>
+  <div class="wrap page-head">
+    <div class="crumb"><a href="../index.html">首页</a> <span>/</span> <span>全部界面</span></div>
+    <div class="num" style="margin-top:16px">ALL — 29 SCREENS</div>
+    <h1>全部界面</h1>
+    <p class="desc">按编号顺序排列的完整界面集。输入关键词可快速定位，点击任意画面进入大图模式，支持键盘 ← → 与左右滑动切换。</p>
+    <div class="page-meta">
+      <span class="chip">29 个画面</span>
+      <span class="chip">6 个章节</span>
+      <span class="chip">390 × 870</span>
+      <a class="chip" href="../screen.html?id=s00a">从第一张开始看 →</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="filter-bar">
+      <label class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-filter placeholder="搜索画面名称，如：申请、对话、筛选…" aria-label="搜索画面">
+      </label>
+      <span class="filter-count" data-count></span>
+    </div>
+
+    <div class="gallery" data-gallery></div>
+  </div>
+</main>
+
+<footer class="site-footer" data-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
